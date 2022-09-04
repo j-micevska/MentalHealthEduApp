@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from MentalHealthEduApp import views
-from MentalHealthEduApp.views import register, courses, forum, login, profile, helppage, experiences, tests
+from MentalHealthEduApp.views import register, courses, forum, user_login, profile, helppage, experiences, tests
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name="register"),
-    path('login/', login, name="login"),
+    path('login/', user_login, name="user_login"),
     path('courses/', courses, name="courses"),
     path('forum/', forum, name="forum"),
     path('profile/', profile, name="profile"),
