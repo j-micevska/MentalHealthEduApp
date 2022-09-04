@@ -48,8 +48,27 @@
 </nav>
 <hr style="color: indianred">
 
-<div>
-    <p> {{ course }}</p>
+<form method="get" style="width: 100%">
+       <div class="form-group mx-sm-3 mb-2">
+           <div class="row" style="margin-left: 25%">
+               <div class="col-7">
+                    <input name="q" type="" class="form-control col-8" id="" placeholder="Клучен збор">
+               </div>
+               <div class="col-3">
+                   <button type="submit" class="btn btn-outline-primary btn-md">Пребарај</button>
+               </div>
+        </div>
+       </div>
+</form>
+
+<div class="card" style="width: 80%; margin-left: 10%; margin-top: 30px">
+  <div class="card-body">
+    <h1 class="card-title">{{ course.name }}</h1>
+    <h3>Симптоми и знаци</h3>
+    <p class="card-text">{{ course.symptoms }}</p>
+    <h3>Како да помогнете</h3>
+    <p class="card-text">{{ course.help }}</p>
+  </div>
 </div>
 
 </body>

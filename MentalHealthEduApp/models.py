@@ -13,6 +13,9 @@ class Course(models.Model):
     class Meta:
         verbose_name_plural = "courses"
 
+    def __str__(self):
+        return self.name
+
 
 class Message(models.Model):
     content = models.CharField(max_length=500)

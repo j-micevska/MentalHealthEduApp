@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .models import Course, Message
 from .forms import MessageForm, RegisterForm
 from django.contrib.auth import authenticate, login
@@ -68,6 +69,12 @@ def user_login(request):
 def courses(request):
     context = {"courses": Course.objects.all()}
     return render(request, "Courses.html", context=context)
+
+
+def course_details(request, id):
+    context = {"course": Course.objects.get(id=id)}
+    return render(request, "Course.html", context=context)
+
 
 
 def forum(request):
