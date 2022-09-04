@@ -1,0 +1,1 @@
+web: gunicorn Hw5_191018.wsgi
