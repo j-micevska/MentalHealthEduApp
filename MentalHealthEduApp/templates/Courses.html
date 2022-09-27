@@ -48,14 +48,18 @@
 </nav>
 <hr style="color: indianred">
 
-<form method="get" style="width: 100%">
+<form method="post" style="width: 100%">
+    {% csrf_token %}
        <div class="form-group mx-sm-3 mb-2">
            <div class="row" style="margin-left: 25%">
-               <div class="col-7">
-                    <input name="q" type="" class="form-control col-8" id="" placeholder="Клучен збор">
+               <div class="col-6">
+                    <input name="keyword" type="text" class="form-control col-8" placeholder="Клучен збор">
                </div>
                <div class="col-3">
-                   <button type="submit" class="btn btn-outline-primary btn-md">Пребарај</button>
+                   <button type="submit" name="search" value="Search" class="btn btn-outline-primary btn-md">Пребарај</button>
+               </div>
+               <div class="col-3">
+                       <a style="height: 40px" class="btn btn-outline-success btn-md" href="/courses/">Сите</a>
                </div>
         </div>
        </div>
@@ -67,7 +71,7 @@
 {% for course in courses %}
     <div class="col-md-3 m-2">
       <div class="card" style="width: 18rem;">
-          <img src="bg.png" class="card-img-top" alt="picture">
+          <img src="../../media/bg.png" class="card-img-top" alt="picture">
           <div class="card-body">
             <h5 class="card-title">{{ course.name }}</h5>
             <a href="/courses/{{ course.id }}/" class="link-primary">Отвори</a>

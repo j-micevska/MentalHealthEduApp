@@ -67,14 +67,18 @@ def user_login(request):
 
 
 def courses(request):
-    context = {"courses": Course.objects.all()}
-    return render(request, "Courses.html", context=context)
+    if request.method == 'POST':
+        keyword = request.POST['keyword']
+        context = {"courses": Course.objects.filter(name__icontains=str(keyword))}
+        return render(request, "Courses.html", context=context)
+    else:
+        context = {"courses": Course.objects.all()}
+        return render(request, "Courses.html", context=context)
 
 
 def course_details(request, id):
     context = {"course": Course.objects.get(id=id)}
     return render(request, "Course.html", context=context)
-
 
 
 def forum(request):
@@ -87,18 +91,6 @@ def forum(request):
             return redirect("forum")
     context = {"messages": Message.objects.all(), "form": MessageForm}
     return render(request, "Forum.html", context=context)
-
-
-def search(request):
-    model = Course
-    template_name = 'Search.html'
-
-    def get_queryset(self):  # new
-        query = self.request.GET.get("q")
-        object_list = Course.objects.filter(
-            Q(name__icontains=query) | Q(state__icontains=query)
-        )
-        return object_list
 
 
 def helppage(request):

@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from MentalHealthEduApp import views
+from django.urls import path
+from django.conf import settings
 from MentalHealthEduApp.views import register, courses, forum, user_login, profile, helppage, experiences, tests, course_details
 
 urlpatterns = [
@@ -29,5 +30,5 @@ urlpatterns = [
     path('experiences/', experiences, name="experiences"),
     path('tests/', tests, name="tests"),
     path('helppage/', helppage, name="helppage"),
-    path("courses/<int:id>/", course_details , name="course_details"),
-]
+    path("courses/<int:id>/", course_details, name="course_details"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
