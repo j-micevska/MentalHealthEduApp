@@ -24,6 +24,10 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Најава</p>
 
+                  {% if error_message %}
+                            <p class="text-center" style="color: indianred"> {{ error_message }} </p>
+                    {% endif %}
+
                 <form class="mx-1 mx-md-4" method="post">
                     {% csrf_token %}
 

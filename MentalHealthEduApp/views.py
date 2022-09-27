@@ -15,23 +15,25 @@ from django.shortcuts import render
 def register(request):
     template = 'Register.html'
 
+    if request.user.is_authenticated == True:
+        return redirect("courses")
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             if User.objects.filter(username=form.cleaned_data['username']).exists():
                 return render(request, template, {
                     'form': form,
-                    'error_message': 'Username already exists.'
+                    'error_message': 'Корисничкото име веќе постои'
                 })
             elif User.objects.filter(email=form.cleaned_data['email']).exists():
                 return render(request, template, {
                     'form': form,
-                    'error_message': 'Email already exists.'
+                    'error_message': 'Овој е-маил веќе постои'
                 })
             elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
                 return render(request, template, {
                     'form': form,
-                    'error_message': 'Passwords do not match.'
+                    'error_message': 'Лозинките не се совпаѓаат'
                 })
             else:
                 user = User.objects.create_user(
@@ -63,15 +65,16 @@ def user_login(request):
             login(request, user)
             return redirect("courses")
         else:
-            return render(request, 'Login.html', {'error_message': 'Incorrect username and / or password.'})
+            return render(request, 'Login.html', {'error_message': 'Погрешно корисничко име или лозинка'})
     else:
         return render(request, 'Login.html')
 
 
+@login_required()
 def user_logout(request):
     if request.user.is_authenticated == True:
         logout(request)
-        return redirect("register")
+        return redirect("user_login")
 
 
 @login_required()
