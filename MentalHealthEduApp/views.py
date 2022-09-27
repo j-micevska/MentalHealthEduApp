@@ -1,10 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Course, Message
 from .forms import MessageForm, RegisterForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 
 # Create your views here.
@@ -66,6 +68,13 @@ def user_login(request):
         return render(request, 'Login.html')
 
 
+def user_logout(request):
+    if request.user.is_authenticated == True:
+        logout(request)
+        return redirect("register")
+
+
+@login_required()
 def courses(request):
     if request.method == 'POST':
         keyword = request.POST['keyword']
@@ -76,11 +85,13 @@ def courses(request):
         return render(request, "Courses.html", context=context)
 
 
+@login_required()
 def course_details(request, id):
     context = {"course": Course.objects.get(id=id)}
     return render(request, "Course.html", context=context)
 
 
+@login_required()
 def forum(request):
     if request.method == "POST":
         form = MessageForm(request.POST)
@@ -93,17 +104,30 @@ def forum(request):
     return render(request, "Forum.html", context=context)
 
 
+@login_required()
 def helppage(request):
     return render(request, "HelpPage.html")
 
 
+@login_required()
 def tests(request):
     return render(request, "Tests.html")
 
 
+@login_required()
 def profile(request):
-    return render(request, "Profile.html")
+    context = {"messages": Message.objects.filter(author=request.user)}
+    return render(request, "Profile.html", context=context)
 
 
+@login_required
+def delete_message(request,message_id=None):
+    if request.user.is_authenticated == True:
+        message_to_delete = Message.objects.get(id=message_id)
+        message_to_delete.delete()
+        return redirect("profile")
+
+
+@login_required()
 def experiences(request):
     return render(request, "Experiences.html")

@@ -17,7 +17,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from MentalHealthEduApp.views import register, courses, forum, user_login, profile, helppage, experiences, tests, course_details
+from MentalHealthEduApp.views import register, courses, forum, user_login, profile, helppage
+from MentalHealthEduApp.views import experiences, tests, course_details, delete_message, user_logout
 
 urlpatterns = [
     path('', register, name="start"),
@@ -31,4 +32,6 @@ urlpatterns = [
     path('tests/', tests, name="tests"),
     path('helppage/', helppage, name="helppage"),
     path("courses/<int:id>/", course_details, name="course_details"),
+    path("delete/<message_id>/", delete_message, name='delete_message'),
+    path('logout/', user_logout, name='user_logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

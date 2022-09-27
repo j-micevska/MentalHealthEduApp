@@ -42,10 +42,46 @@
             <li class="nav-item">
 			  <a class="nav-link" href="/helppage/">Помош</a>
 			</li>
+              <li class="nav-item">
+			  <a class="nav-link" href="/logout/">Одјава</a>
+			</li>
 		  </ul>
 		</div>
 	  </div>
 </nav>
 <hr style="color: indianred">
+
+<div class="card" style="width: 90%; margin-left: 5%; margin-top: 30px">
+    <h3>Мои коментари</h3>
+    <div class="row justify-content-center" style="width: 100%">
+    <br>
+    {% for message in messages %}
+          <div class="col-sm-5" style="margin: 30px">
+            <div class="card border-primary">
+              <div class="card-body">
+                <p class="card-text" style="text-align: center">{{ message.content }}</p>
+                <hr style="color: indianred">
+                  <p class="card-text" style="text-align: center">
+                  <a style="justify-content: center; width: 100%" href="/delete/{{ message.id }}/">Избриши</a>
+                  </p>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+    </div>
+</div>
+
+<div class="card" style="width: 90%; margin-left: 5%; margin-top: 30px">
+    <h3>Мои искуства</h3>
+</div>
+
+<div class="card" style="width: 90%; margin-left: 5%; margin-top: 30px">
+    <h3>Мои резултати</h3>
+</div>
+
+<div class="card" style="width: 90%; margin-left: 5%; margin-top: 30px">
+    <h3>Зачувани</h3>
+</div>
+
 </body>
 </html>
