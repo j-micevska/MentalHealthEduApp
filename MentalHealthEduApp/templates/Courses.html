@@ -59,7 +59,7 @@
                    <button type="submit" name="search" value="Search" class="btn btn-outline-primary btn-md">Пребарај</button>
                </div>
                <div class="col-3">
-                       <a style="height: 40px" class="btn btn-outline-success btn-md" href="/courses/">Сите</a>
+                       <a style="height: 40px" class="btn btn-outline-success btn-md" href="/courses/">Назад кон сите</a>
                </div>
         </div>
        </div>
@@ -71,7 +71,7 @@
 {% for course in courses %}
     <div class="col-md-3 m-2">
       <div class="card" style="width: 18rem;">
-          <img src="../../media/bg.png" class="card-img-top" alt="picture">
+          <img src="../../static/media/bg.png" class="card-img-top" alt="picture">
           <div class="card-body">
             <h5 class="card-title">{{ course.name }}</h5>
             <a href="/courses/{{ course.id }}/" class="link-primary">Отвори</a>
